@@ -45,6 +45,7 @@ public class ReadingTables {
 	}
 	@Test
 	public void ReadingInformation() throws InterruptedException {
+		
 		Select pageView= new Select (driver.findElement(By.id("recPerPage")));
 		pageView.selectByVisibleText("100");
 		Thread.sleep(3000);
@@ -53,17 +54,17 @@ public class ReadingTables {
 		
 		HashMap<String, String> appInfo = new HashMap<>();
 		for (int i = 0; i < info.size(); i++) {
-			//String line=driver.findElement(By.xpath("//table[@id='reportTab']//tbody/tr["+i+"]")).getText();
 			String key=driver.findElement(By.xpath("//table[@id='reportTab']//tbody/tr["+(i+1)+"]/td[1]")).getText();
 			String value=driver.findElement(By.xpath("//table[@id='reportTab']//tbody/tr["+(i+1)+"]/td[2]")).getText()+","
-					+driver.findElement(By.xpath("//table[@id='reportTab']//tbody/tr["+(i+1)+"]/td[3]")).getText()+","
-					+driver.findElement(By.xpath("//table[@id='reportTab']//tbody/tr["+(i+1)+"]/td[4]")).getText()+","
-				    +driver.findElement(By.xpath("//table[@id='reportTab']//tbody/tr["+(i+1)+"]/td[5]")).getText()+",";
+				     +driver.findElement(By.xpath("//table[@id='reportTab']//tbody/tr["+(i+1)+"]/td[3]")).getText()+","
+				     +driver.findElement(By.xpath("//table[@id='reportTab']//tbody/tr["+(i+1)+"]/td[4]")).getText()+","
+				     +driver.findElement(By.xpath("//table[@id='reportTab']//tbody/tr["+(i+1)+"]/td[5]")).getText()+",";
 			
 			appInfo.put(key, value);	
 		}
 		
 		System.out.println(appInfo);
+		
 		String expected=driver.findElement(By.xpath("//span[@id='total']")).getText();
 		String actual= String.valueOf(appInfo.size());
 		Assert.assertEquals(actual, expected);
